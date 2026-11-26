@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MSD Decoder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="vendor/leaflet/leaflet.js"></script>
+  <script defer src="decoder.js?v=2"></script>
+  <script defer src="app.js?v=2"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">+</span><div><strong>MSD Decoder</strong><span>eCall data workspace</span></div></div>
+    <div class="top-meta"><span class="status-dot"></span> LOCAL DECODING <span class="meta-divider"></span> EN 15722:2020</div>
+  </header>
+  <main>
+    <div class="page-heading"><div><div class="eyebrow">ECALL / ANALYSIS</div><h1>Minimum set of data</h1><p>Decode and inspect a version 2 or 3 eCall message.</p></div><div class="format-tag">UPER <span>/</span> V2 + V3</div></div>
+    <section class="workspace" aria-label="MSD input and map">
+      <div class="input-panel">
+        <div class="section-heading"><div><span class="section-number">01</span><h2>Message input</h2></div><span class="small-label">HEX / UPER</span></div>
+        <label for="raw">Raw MSD</label>
+        <textarea id="raw" spellcheck="false" placeholder="Paste hexadecimal MSD data here..."></textarea>
+        <div class="input-actions"><button id="decode" class="primary">Decode message <span aria-hidden="true">&rarr;</span></button><button id="sample" class="secondary">Load example</button><button id="clear" class="text-button">Clear</button></div>
+        <div id="message" class="message" role="status" aria-live="polite">Ready for a message</div>
+        <div class="input-footer"><span><span class="privacy-dot"></span> Decoded in your browser</span><span id="byte-count">0 bytes</span></div>
+      </div>
+      <div class="map-panel">
+        <div class="map-heading"><div><span class="section-number">02</span><h2>Location</h2></div><span class="small-label">WGS 84</span></div>
+        <div id="map" aria-label="Vehicle location map"></div>
+        <div id="map-placeholder" class="map-placeholder"><div class="crosshair">&#8853;</div><strong>No location to display</strong><span>Decode a message with valid coordinates</span></div>
+        <div class="map-legend"><span><i class="pin current"></i> Current</span><span><i class="pin first"></i> N-1</span><span><i class="pin second"></i> N-2</span><a id="map-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Open in OpenStreetMap &nearr;</a></div>
+      </div>
+    </section>
+    <section class="results" aria-label="Decoded values">
+      <div class="results-header"><div><span class="section-number">03</span><h2>Decoded values</h2></div><span id="result-status" class="small-label">AWAITING MESSAGE</span></div>
+      <div class="result-grid">
+        <section class="result-section"><div class="result-title"><span>01</span><h3>Message &amp; control</h3></div><dl id="control-fields"></dl></section>
+        <section class="result-section"><div class="result-title"><span>02</span><h3>Vehicle</h3></div><dl id="vehicle-fields"></dl></section>
+        <section class="result-section"><div class="result-title"><span>03</span><h3>Position &amp; movement</h3></div><dl id="position-fields"></dl></section>
+        <section class="result-section"><div class="result-title"><span>04</span><h3>Additional data</h3></div><dl id="additional-fields"></dl></section>
+      </div>
+    </section>
+    <footer><span>MSD DECODER <span class="footer-slash">/</span> EN 15722:2020</span><span>Map tiles by OpenStreetMap contributors</span></footer>
+  </main>
+</body>
+</html>
